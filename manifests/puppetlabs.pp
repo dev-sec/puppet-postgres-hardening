@@ -40,9 +40,11 @@ class postgres_hardening::puppetlabs(
   postgresql::server::config_entry { 'password_encryption':
     value => 'on',
   }
-  postgresql::server::config_entry { 'ssl':
-    value => 'on',
-  }
+
+  # postgresql::server::config_entry { 'ssl':
+  #   value => 'on',
+  # }
+
   postgresql::server::config_entry { 'ssl_ciphers':
     value => 'ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH',
   }
