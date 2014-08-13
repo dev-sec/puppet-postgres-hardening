@@ -17,36 +17,34 @@ class postgres_hardening::puppetlabs(
 ) {
   # hardening options
   postgresql::server::config_entry { 'logging_collector':
-    value => 'on',
+    value => $postgres_hardening::config_entry_logging_collector,
   }
   postgresql::server::config_entry { 'log_directory':
-    value => 'pg_log',
+    value => $postgres_hardening::config_entry_log_directory,
   }
   postgresql::server::config_entry { 'log_connections':
-    value => 'on',
+    value => $postgres_hardening::config_entry_log_connections,
   }
   postgresql::server::config_entry { 'log_disconnections':
-    value => 'on',
+    value => $postgres_hardening::config_entry_log_disconnections,
   }
   postgresql::server::config_entry { 'log_duration':
-    value => 'on',
+    value => $postgres_hardening::config_entry_log_duration,
   }
   postgresql::server::config_entry { 'log_hostname':
-    value => 'on',
+    value => $postgres_hardening::config_entry_log_hostname,
   }
   postgresql::server::config_entry { 'log_line_prefix':
-    value => '%t %u %d %h',
+    value => $postgres_hardening::config_entry_log_line_prefix,
   }
   postgresql::server::config_entry { 'password_encryption':
-    value => 'on',
+    value => $postgres_hardening::config_entry_password_encryption,
   }
-
-  # postgresql::server::config_entry { 'ssl':
-  #   value => 'on',
-  # }
-
+  postgresql::server::config_entry { 'ssl':
+    value => $postgres_hardening::config_entry_ssl,
+  }
   postgresql::server::config_entry { 'ssl_ciphers':
-    value => 'ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH',
+    value => $postgres_hardening::config_entry_ssl_ciphers,
   }
 
   if ($::osfamily == 'Debian') {
