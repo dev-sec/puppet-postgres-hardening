@@ -62,6 +62,21 @@ class postgres_hardening::puppetlabs(
       mode    => '0700',
       require => Class['postgresql::server::install'],
     }
+
+    exec { 'purge link to /etc/ssl/certs/ssl-cert-snakeoil.pem':
+      path    => '/bin',
+      command => "rm /var/lib/postgresql/${postgresql::server::version}/main/server.crt",
+      onlyif  => "ls -l /var/lib/postgresql/${postgresql::server::version}/main/server.crt |grep /etc/ssl/certs/ssl-cert-snakeoil.pem",
+      require => Class['postgresql::server::install']
+    }
+
+    exec { 'purge link to /etc/ssl/private/ssl-cert-snakeoil.key':
+      path    => '/bin',
+      command => "rm /var/lib/postgresql/${postgresql::server::version}/main/server.key",
+      onlyif  => "ls -l /var/lib/postgresql/${postgresql::server::version}/main/server.key |grep /etc/ssl/private/ssl-cert-snakeoil.key",
+      require => Class['postgresql::server::install']
+    }
+
   }
   # finally we need to make sure our options are written to the config file
   class{'postgres_hardening::puppetlabs_override': }
