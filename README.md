@@ -93,6 +93,7 @@ class { '::postgres_hardening':
   provider => 'puppetlabs/postgresql',
   config_entry_ssl => 'on'
 }
+```
 
 ## Contributors + Kudos
 
