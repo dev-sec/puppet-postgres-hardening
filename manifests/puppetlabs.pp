@@ -55,7 +55,7 @@ class postgres_hardening::puppetlabs(
       require => Class['postgresql::server::install'],
     }
 
-    file { "/var/lib/postgresql/${postgresql::server::version}":
+    file { '/var/lib/postgresql/${postgresql::server::version}':
       ensure  => 'directory',
       mode    => '0700',
       require => Class['postgresql::server::install'],
